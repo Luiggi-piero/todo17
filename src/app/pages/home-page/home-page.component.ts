@@ -6,11 +6,12 @@ import { MatIcon } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbar } from '@angular/material/toolbar';
 
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CartService } from '../../services/cart.service';
+import { IApiResponseProduct } from '../../services/models/product-api.interface';
 import { ProductsApiService } from '../../services/products-api.service';
 import { ProductComponent } from './product/product.component';
-import { IApiResponseProduct } from '../../services/models/product-api.interface';
-import { CartService } from '../../services/cart.service';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-home-page',
@@ -23,6 +24,7 @@ import { Observable } from 'rxjs';
     MatSidenavModule,
     ProductComponent,
     AsyncPipe,
+    RouterLink,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
@@ -33,9 +35,15 @@ export class HomePageComponent implements OnInit {
   // _   : significa que solo se usa aqui en el controlador/archivo ts
   private readonly _productsApiService = inject(ProductsApiService); // accediendo a la instancia de esa clase/servicio
   readonly cartApiService = inject(CartService);
+  private readonly _activatedRoute = inject(ActivatedRoute);
+  private readonly _router = inject(Router);
 
   products: IApiResponseProduct[] = [];
-  products$!:Observable<IApiResponseProduct[]>;
+  products$!: Observable<IApiResponseProduct[]>;
+
+  constructor() {
+    console.log('Navigation:', this._router.getCurrentNavigation()?.extras.state);
+  }
 
   ngOnInit(): void {
     // this._productsApiService.getProducts().subscribe({
@@ -46,5 +54,25 @@ export class HomePageComponent implements OnInit {
     // this._cartApiService.cartObservable$.subscribe({
     //   next: (number) => (this.count = number),
     // });
+    this._getValueRoutes();
+  }
+
+  private _getValueRoutes() {
+    console.log(
+      'Valores obtenidos por query params',
+      this._activatedRoute.snapshot.queryParams
+    );
+
+    // mejor usar esto para acceder solo al query param exacto
+    console.log(
+      'Valores obtenidos por query params',
+      this._activatedRoute.snapshot.queryParamMap.get('user')
+    );
+
+    // Otra forma de acceder a un query parm
+    console.log(
+      'Valores obtenidos por query params',
+      this._activatedRoute.snapshot.queryParams['user']
+    );
   }
 }
