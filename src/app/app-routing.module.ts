@@ -3,14 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
-import { FullProductDetailsPageComponent } from './pages/payment-page/full-product-details-page/full-product-details-page.component';
+import FullProductDetailsPageComponent from './pages/payment-page/full-product-details-page/full-product-details-page.component';
 import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
 import { SimpleProductDetailPageComponent } from './pages/payment-page/simple-product-detail-page/simple-product-detail-page.component';
-import { ProductsResolverService } from './services/products.resolver';
+// import { ProductsResolverService } from './services/products.resolver';
 
 const routes: Routes = [
   {
     path: 'home',
+    title: 'Bienvenido! home',
     component: HomePageComponent,
   },
   {
@@ -24,6 +25,7 @@ const routes: Routes = [
   },
   {
     path: 'login',
+    title: 'Inicio de Sesión',
     component: LoginPageComponent,
   },
   {
@@ -37,7 +39,7 @@ const routes: Routes = [
     data: {
       title: 'Pagos',
     },
-    resolve: { products: ProductsResolverService },
+    // resolve: { products: ProductsResolverService },
     children: [
       {
         path: 'simple-product-detail',
@@ -76,7 +78,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true })],
   exports: [RouterModule],
 })
 export class RoutingModule {}

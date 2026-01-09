@@ -1,5 +1,5 @@
 import { AsyncPipe } from '@angular/common';
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { MatBadgeModule } from '@angular/material/badge';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
@@ -12,6 +12,7 @@ import { CartService } from '../../services/cart.service';
 import { IApiResponseProduct } from '../../services/models/product-api.interface';
 import { ProductsApiService } from '../../services/products-api.service';
 import { ProductComponent } from './product/product.component';
+import { DemoService } from '../../services/demo.service';
 
 @Component({
   selector: 'app-home-page',
@@ -30,6 +31,7 @@ import { ProductComponent } from './product/product.component';
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent implements OnInit {
+  @Input() user?: string;
   count = 0;
   // private: si no lo vas a usar en el html
   // _   : significa que solo se usa aqui en el controlador/archivo ts
@@ -37,12 +39,16 @@ export class HomePageComponent implements OnInit {
   readonly cartApiService = inject(CartService);
   private readonly _activatedRoute = inject(ActivatedRoute);
   private readonly _router = inject(Router);
+  private readonly _demoService = inject(DemoService);
 
   products: IApiResponseProduct[] = [];
   products$!: Observable<IApiResponseProduct[]>;
 
   constructor() {
-    console.log('Navigation:', this._router.getCurrentNavigation()?.extras.state);
+    console.log(
+      'Navigation:',
+      this._router.getCurrentNavigation()?.extras.state
+    );
   }
 
   ngOnInit(): void {
@@ -69,10 +75,6 @@ export class HomePageComponent implements OnInit {
       this._activatedRoute.snapshot.queryParamMap.get('user')
     );
 
-    // Otra forma de acceder a un query parm
-    console.log(
-      'Valores obtenidos por query params',
-      this._activatedRoute.snapshot.queryParams['user']
-    );
+    console.log('@Input', this.user);
   }
 }

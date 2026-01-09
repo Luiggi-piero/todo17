@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { MatButton, MatIconButton } from '@angular/material/button';
 import { MatIcon } from '@angular/material/icon';
 import {
@@ -16,10 +16,19 @@ import {
   imports: [RouterOutlet, RouterLink, MatButton, MatIconButton, MatIcon],
 })
 export class PaymentPageComponent implements OnInit {
+  @Input() user?: string;
+  @Input() title!: string;
+  @Input() products!: string;
+
   private readonly _activatedRoute = inject(ActivatedRoute); // representa la ruta actual activa
   private readonly _router = inject(Router); // sirve para navegar programáticamente
 
   ngOnInit(): void {
+
+    console.log('@Input - path params =>' , this.user);
+    console.log('@Input - data property =>' , this.title);
+    console.log('@Input - resolve =>' , this.products);
+
     console.log(
       'Datos enviados por params',
       this._activatedRoute.snapshot.params

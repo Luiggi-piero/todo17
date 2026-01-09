@@ -14,13 +14,12 @@ import { RoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 
 import { ProductsApiService } from './services/products-api.service';
 
 @NgModule({
-  declarations: [AppComponent, NotFoundPageComponent, LoginPageComponent],
+  declarations: [AppComponent, NotFoundPageComponent],
   imports: [
     BrowserModule,
     RoutingModule,

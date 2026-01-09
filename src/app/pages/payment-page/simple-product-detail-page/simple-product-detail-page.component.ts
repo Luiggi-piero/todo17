@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatTableModule } from '@angular/material/table';
+import { ActivatedRoute } from '@angular/router';
 
 export interface PeriodicElement {
   name: string;
@@ -28,7 +29,20 @@ const ELEMENT_DATA: PeriodicElement[] = [
   templateUrl: './simple-product-detail-page.component.html',
   styleUrl: './simple-product-detail-page.component.scss',
 })
-export class SimpleProductDetailPageComponent {
+export class SimpleProductDetailPageComponent implements OnInit {
+  private readonly _activadedRoute = inject(ActivatedRoute);
+
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = ELEMENT_DATA;
+
+  ngOnInit(): void {
+    console.log(
+      'Data property => ',
+      this._activadedRoute.parent?.snapshot.data // Leer datos del parent route
+    );
+    console.log(
+      'Path params => ',
+      this._activadedRoute.parent?.snapshot.paramMap.get('user')  // Leer datos del parent route
+    );
+  }
 }
