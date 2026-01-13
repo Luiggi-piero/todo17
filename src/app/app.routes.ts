@@ -33,6 +33,12 @@ export default [
     pathMatch: 'prefix', // valores que llevan a /login  -> /login/algo-raro   /login/algo-mas
   },
   {
+    path: 'register',
+    title: 'Registro',
+    loadComponent: () =>
+      import('./pages/register-page/register-page.component'),
+  },
+  {
     path: 'payment/:user',
     data: {
       title: 'Pagos',
