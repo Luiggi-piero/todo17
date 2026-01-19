@@ -4,7 +4,7 @@ import {
   provideClientHydration,
 } from '@angular/platform-browser';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
@@ -15,8 +15,9 @@ import { AppComponent } from './app.component';
 
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
-
-import { ProductsApiService } from './services/products-api.service';
+import { ProductsApiService } from './services/api/products-api.service';
+import { ApiInterceptor } from './interceptors/api.interceptor';
+import { DemoInterceptor } from './interceptors/demo.interceptor';
 
 @NgModule({
   declarations: [AppComponent, NotFoundPageComponent],
@@ -34,6 +35,8 @@ import { ProductsApiService } from './services/products-api.service';
     provideClientHydration(),
     provideAnimationsAsync(),
     ProductsApiService,
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: DemoInterceptor, multi: true },
   ],
   bootstrap: [AppComponent],
 })

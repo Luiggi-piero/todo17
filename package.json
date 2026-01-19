@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:todo17": "node dist/todo17/server/server.mjs"
+    "serve:ssr:todo17": "node dist/todo17/server/server.mjs",
+    "qa-dev": "ng s --configuration qa"
   },
   "private": true,
   "dependencies": {

@@ -66,7 +66,24 @@
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "with": "src/environments/environment.development.ts",
+                  "replace": "src/environments/environment.ts"
+                }
+              ]
+            },
+            "qa": {
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "with": "src/environments/environment.qa.ts",
+                  "replace": "src/environments/environment.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -79,6 +96,9 @@
             },
             "development": {
               "buildTarget": "todo17:build:development"
+            },
+            "qa": {
+              "buildTarget": "todo17:build:qa"
             }
           },
           "defaultConfiguration": "development"

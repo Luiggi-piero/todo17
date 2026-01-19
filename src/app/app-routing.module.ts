@@ -26,7 +26,10 @@ const routes: Routes = [
   {
     path: 'login',
     title: 'Inicio de Sesión',
-    component: LoginPageComponent,
+    loadChildren: () =>
+      import('./pages/login-page/login-page.module').then(
+        (m) => m.LoginPageModule,
+      ),
   },
   {
     path: 'login',

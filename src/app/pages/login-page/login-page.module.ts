@@ -10,6 +10,7 @@ import { LoginPageComponent } from './login-page.component';
 
 import { RouterModule, Routes } from '@angular/router';
 import { DemoService } from '../../services/demo.service';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const routes: Routes = [
   {
@@ -27,6 +28,7 @@ export const routes: Routes = [
     MatIconModule,
     MatInputModule,
     MatButtonModule,
+    ReactiveFormsModule,
   ],
   exports: [LoginPageComponent],
   providers: [DemoService],

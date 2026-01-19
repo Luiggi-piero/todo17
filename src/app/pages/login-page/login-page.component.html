@@ -4,16 +4,25 @@
       <mat-card-title>Inicio de Sesión</mat-card-title>
     </mat-card-header>
 
-    <mat-card-content class="card-content">
+    <mat-card-content class="card-content" [formGroup]="form">
       <mat-form-field appearance="outline">
         <mat-label>Usuario</mat-label>
-        <input matInput placeholder="Ingrese su usuario" />
+        <input
+          matInput
+          placeholder="Ingrese su usuario"
+          formControlName="username"
+        />
         <mat-icon matSuffix>account_circle</mat-icon>
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Contraseña</mat-label>
-        <input matInput type="password" placeholder="Ingrese su Contraseña" />
+        <input
+          matInput
+          type="password"
+          placeholder="Ingrese su Contraseña"
+          formControlName="password"
+        />
         <mat-icon matSuffix>lock</mat-icon>
       </mat-form-field>
 

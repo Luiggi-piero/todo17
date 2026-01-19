@@ -3,7 +3,7 @@
 import { inject } from '@angular/core';
 import { ActivatedRouteSnapshot, ResolveFn } from '@angular/router';
 import { IApiResponseProduct } from './models/product-api.interface';
-import { ProductsApiService } from './products-api.service';
+import { ProductsApiService } from './api/products-api.service';
 
 export const ProductsResolverServiceFn: ResolveFn<IApiResponseProduct[]> = (
   route: ActivatedRouteSnapshot
