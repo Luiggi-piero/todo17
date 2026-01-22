@@ -1,4 +1,8 @@
 .container {
+  flex-direction: column;
+  gap: 1em;
+  align-items: center;
+  justify-content: center;
   background: linear-gradient(
     35deg,
     rgba(7, 1, 172, 1) 0%,

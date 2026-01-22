@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import {
   FormControl,
   NonNullableFormBuilder,
@@ -7,14 +7,19 @@ import {
 } from '@angular/forms';
 import { MatButton } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { MatDialog } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIcon } from '@angular/material/icon';
 import { MatInput } from '@angular/material/input';
+import { RouterLink } from '@angular/router';
+import { Observable } from 'rxjs';
+import { CanComponentDeactive } from '../../guards/exit.guard';
 import {
   PasswordStateMatcher,
   crossPasswordMatchingValidatior,
   customPasswordValidator,
 } from './register-custom-validators';
+import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-register-page',
@@ -26,14 +31,37 @@ import {
     MatIcon,
     MatButton,
     ReactiveFormsModule,
+    RouterLink,
   ],
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.scss',
 })
-export default class RegisterPageComponent {
+export default class RegisterPageComponent implements CanComponentDeactive {
+  // @HostListener :  detector de eventos
+  // 'window:beforeunload'   : nombre del evento detectado
+  // ['$event'] : el evento
+  // NOTA
+  //   Qué NO puedes hacer en este evento
+  // ❌ Mostrar modales personalizados
+  // ❌ Ejecutar código asíncrono (HTTP, Observable, Promise)
+  // ❌ Navegar con Router
+  // ❌ Mostrar alert, confirm, snackbar, etc.
+  @HostListener('window:beforeunload', ['$event'])
+  onBeforeReload(e: BeforeUnloadEvent) {
+    const formValid = Object.values(this.formGroup.controls).some(
+      (control) => control.value !== '',
+    );
+
+    if (formValid) {
+      e.preventDefault();
+    }
+    return;
+  }
+
   // private readonly _formBuilder = inject(FormBuilder);
   private readonly _formBuilder = inject(NonNullableFormBuilder);
   passwordStateMatcher = new PasswordStateMatcher();
+  dialog = inject(MatDialog);
 
   // formGroup = new FormGroup({
   // 	names: new FormControl('', { validators: Validators.required, nonNullable: true }),
@@ -53,8 +81,37 @@ export default class RegisterPageComponent {
     },
     {
       validators: crossPasswordMatchingValidatior,
-    }
+    },
   );
+
+  // canDeactivate(): Observable<boolean> | boolean {
+  //   console.log(
+  //     '******* IMPLEMENTANDO canDeactivate desde RegisterPageComponent ******',
+  //   );
+  //   // se lanza el dialog(popup) cuando al menos un valor del formulario tenga datos
+  //  // si tenemos al menos un dato en el formulario, formularioValido sera true, caso contrario false
+  //   const formularioValido = Object.values(this.formGroup.controls).some(
+  //     (control) => control.value !== '',
+  //   );
+  //   // hay al menos un campo completado del formulario
+  //   if (formularioValido) {
+  //     const reference = this.dialog.open(ConfirmDialogComponent);
+  //     return reference.afterClosed(); // valor de la repuesta de ConfirmDialogComponent(true/false ver su html) en un observable
+  //   }
+
+  //   return true;
+  // }
+
+  canDeactivate(): Observable<boolean> | boolean {
+    console.log(
+      '******* IMPLEMENTANDO canDeactivate desde RegisterPageComponent ******',
+    );
+    // si tenemos al menos un dato en el formulario retornamos true, caso contrario false
+    const formularioValido = Object.values(this.formGroup.controls).some(
+      (control) => control.value !== '',
+    );
+    return formularioValido;
+  }
 
   clickRegister(): void {
     // Acceder al valor de un control

@@ -30,6 +30,8 @@ export class LoginPageComponent {
     this._authApiService.login(this.form.getRawValue()).subscribe({
       next: (response) => {
         localStorage.setItem('token', response.token);
+        localStorage.setItem('role', 'admin');
+        this._route.navigateByUrl('/');
       },
       error: (e) => {
         console.log('UPS UN ERROR, manejado desde el componente', e);

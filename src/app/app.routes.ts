@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 
+import { AuthGuardFn } from './guards/auth.guard';
+import { ExitGuardFn } from './guards/exit.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { ProductsResolverServiceFn } from './services/products.resolver';
@@ -24,7 +26,7 @@ export default [
     title: 'Inicio de Sesión',
     loadChildren: () =>
       import('./pages/login-page/login-page.module').then(
-        (m) => m.LoginPageModule
+        (m) => m.LoginPageModule,
       ),
   },
   {
@@ -35,11 +37,13 @@ export default [
   {
     path: 'register',
     title: 'Registro',
+    canDeactivate: [ExitGuardFn],
     loadComponent: () =>
       import('./pages/register-page/register-page.component'),
   },
   {
     path: 'payment/:user',
+    canActivate: [AuthGuardFn],
     data: {
       title: 'Pagos',
     },
