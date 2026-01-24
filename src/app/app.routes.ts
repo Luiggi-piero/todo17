@@ -5,6 +5,13 @@ import { ExitGuardFn } from './guards/exit.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { ProductsResolverServiceFn } from './services/products.resolver';
+import { UserBasicComponent } from './pages/user/user-basic/user-basic.component';
+import { UserAdminComponent } from './pages/user/user-admin/user-admin.component';
+
+// const isRole = (role: string) => {
+//   const roleLogged = localStorage.getItem('role');
+//   return roleLogged === role;
+// };
 
 export default [
   {
@@ -51,6 +58,26 @@ export default [
     resolve: { products: ProductsResolverServiceFn },
     loadChildren: () => import('./pages/payment-page/payment-page.routes'), // carga el archivo de rutas
   },
+  {
+    path: 'user',
+    title: 'Usuarios',
+    loadChildren: () => import('./pages/user/user.routes'),
+  },
+  // {
+  //   path: 'user',
+  //   children: [
+  //     {
+  //       path: '',
+  //       canMatch: [() => isRole('basic')],
+  //       component: UserBasicComponent,
+  //     },
+  //     {
+  //       path: '',
+  //       canMatch: [() => isRole('admin')],
+  //       component: UserAdminComponent,
+  //     },
+  //   ],
+  // },
 
   //#region Forma 1 para redirigir
   // {

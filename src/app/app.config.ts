@@ -6,7 +6,11 @@ import {
 } from '@angular/common/http';
 import { ApplicationConfig } from '@angular/core';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { provideRouter, withComponentInputBinding } from '@angular/router';
+import {
+  provideRouter,
+  withComponentInputBinding,
+  withHashLocation,
+} from '@angular/router';
 import ROUTES_ROOT from './app.routes';
 import { ApiInterceptor } from './interceptors/api.interceptor';
 import { DemoInterceptor } from './interceptors/demo.interceptor';
@@ -14,7 +18,7 @@ import { ErrorApiInterceptorFn } from './interceptors/error-api.interceptor';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideRouter(ROUTES_ROOT, withComponentInputBinding()),
+    provideRouter(ROUTES_ROOT, withComponentInputBinding(), withHashLocation()),
     provideAnimationsAsync(),
     provideHttpClient(
       withInterceptorsFromDi(),
