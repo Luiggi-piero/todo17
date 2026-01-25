@@ -5,8 +5,6 @@ import { ExitGuardFn } from './guards/exit.guard';
 import { HomePageComponent } from './pages/home-page/home-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import { ProductsResolverServiceFn } from './services/products.resolver';
-import { UserBasicComponent } from './pages/user/user-basic/user-basic.component';
-import { UserAdminComponent } from './pages/user/user-admin/user-admin.component';
 
 // const isRole = (role: string) => {
 //   const roleLogged = localStorage.getItem('role');

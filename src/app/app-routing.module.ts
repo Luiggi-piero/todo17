@@ -1,7 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { HomePageComponent } from './pages/home-page/home-page.component';
-import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { NotFoundPageComponent } from './pages/not-found-page/not-found-page.component';
 import FullProductDetailsPageComponent from './pages/payment-page/full-product-details-page/full-product-details-page.component';
 import { PaymentPageComponent } from './pages/payment-page/payment-page.component';
@@ -81,7 +80,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, { bindToComponentInputs: true, useHash: true })],
+  imports: [
+    RouterModule.forRoot(routes, {
+      bindToComponentInputs: true,
+      useHash: true,
+    }),
+  ],
   exports: [RouterModule],
 })
 export class RoutingModule {}

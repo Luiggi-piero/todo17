@@ -10,12 +10,12 @@ import { isPlatformBrowser } from '@angular/common';
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
   intercept(
-    req: HttpRequest<any>,
+    req: HttpRequest<unknown>,
     next: HttpHandler,
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<unknown>> {
     // req: es inmutable, se debe clonar si quieres cambiar algo
     if (req.url.includes('white_')) {
       // No necesita el token

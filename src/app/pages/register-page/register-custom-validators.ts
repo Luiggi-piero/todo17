@@ -1,15 +1,9 @@
-import {
-  AbstractControl,
-  FormGroupDirective,
-  NgForm,
-  ValidationErrors,
-  ValidatorFn,
-} from '@angular/forms';
+import { AbstractControl, ValidationErrors, ValidatorFn } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 
 //Esta expresión regular validará si el texto contiene al menos una minuscula, mayuscula, número, symbolo y que la longitud sea mayor o igual a 8
 const patternPassword = new RegExp(
-  '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{8}'
+  '(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*\\W).{8}',
 );
 
 /**
@@ -18,7 +12,7 @@ const patternPassword = new RegExp(
  * @returns
  */
 export const customPasswordValidator = (
-  control: AbstractControl<string>
+  control: AbstractControl<string>,
 ): ValidationErrors | null => {
   const value = control.value;
 
@@ -39,7 +33,7 @@ export const crossPasswordMatchingValidatior: ValidatorFn = (
   formGroupControl: AbstractControl<{
     password: string;
     confirmPassword: string;
-  }>
+  }>,
 ): ValidationErrors | null => {
   const password = formGroupControl.value.password;
   const confirmPassword = formGroupControl.value.confirmPassword;
@@ -51,8 +45,8 @@ export const crossPasswordMatchingValidatior: ValidatorFn = (
 
 export class PasswordStateMatcher implements ErrorStateMatcher {
   isErrorState(
-    control: AbstractControl,  // es el control de confirmPassword, porque ahi se mostrara el mensaje, se marca en rojo
-    form: FormGroupDirective | NgForm
+    control: AbstractControl, // es el control de confirmPassword, porque ahi se mostrara el mensaje, se marca en rojo
+    // form: FormGroupDirective | NgForms
   ): boolean {
     if (!control || !control.parent) {
       return false;

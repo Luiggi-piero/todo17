@@ -9,8 +9,6 @@ export class AuthApiService {
   private readonly URL_USER = `white_${environment.domain}/auth/login`;
   private readonly _httpClient = inject(HttpClient);
 
-  constructor() {}
-
   login(user: ILoginRequest): Observable<{ token: string }> {
     return this._httpClient.post<{ token: string }>(this.URL_USER, user);
   }

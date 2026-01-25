@@ -3,7 +3,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { IApiResponseProduct } from '../../../services/models/product-api.interface';
 import { CartService } from '../../../services/cart.service';
-import { IProduct } from '../../../services/models/cart.interface';
 
 @Component({
   selector: 'app-product',

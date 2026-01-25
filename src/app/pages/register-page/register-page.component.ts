@@ -19,7 +19,7 @@ import {
   crossPasswordMatchingValidatior,
   customPasswordValidator,
 } from './register-custom-validators';
-import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
+// import { ConfirmDialogComponent } from '../../components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-register-page',
@@ -115,7 +115,7 @@ export default class RegisterPageComponent implements CanComponentDeactive {
 
   clickRegister(): void {
     // Acceder al valor de un control
-    const namesOld = this.formGroup.get('names')?.value;
+    // const namesOld = this.formGroup.get('names')?.value;
     const namesNew = this.formGroup.controls.names.value;
     console.log(namesNew);
 
@@ -155,8 +155,8 @@ export default class RegisterPageComponent implements CanComponentDeactive {
     //#endregion
 
     if (this.formGroup.valid) {
-      const user = this.formGroup.getRawValue(); // todos los valores del formulario, es como el .value
-      const user2 = this.formGroup.value;
+      // const user = this.formGroup.getRawValue(); // todos los valores del formulario, es como el .value
+      // const user2 = this.formGroup.value;
     }
   }
 

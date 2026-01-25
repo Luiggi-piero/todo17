@@ -29,21 +29,11 @@
 // }
 //#endregion
 
-
-
 //#region Enfoque moderno
 import { inject } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivateFn,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, CanActivateFn, Router } from '@angular/router';
 
-export const AuthGuardFn: CanActivateFn = (
-  route: ActivatedRouteSnapshot,
-  state: RouterStateSnapshot,
-) => {
+export const AuthGuardFn: CanActivateFn = (route: ActivatedRouteSnapshot) => {
   console.log('###### AuthGuardFn #########');
   // ver la ruta
   console.log(route);

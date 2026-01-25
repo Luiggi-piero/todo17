@@ -10,9 +10,9 @@ import { Observable } from 'rxjs';
 @Injectable()
 export class DemoInterceptor implements HttpInterceptor {
   intercept(
-    req: HttpRequest<any>,
+    req: HttpRequest<unknown>,
     next: HttpHandler,
-  ): Observable<HttpEvent<any>> {
+  ): Observable<HttpEvent<unknown>> {
     console.log('---DemoInterceptor--->');
     return next.handle(req); // la peticion continua y sale al navegador
   }

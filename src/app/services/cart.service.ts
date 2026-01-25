@@ -9,12 +9,10 @@ export class CartService {
 
   cartObservable$ = new Subject<number>();
 
-  constructor() {}
-
   addToCart(product: IProduct) {
     const idProduct = product.id;
     const index = this._productsDetail.findIndex(
-      ({ product }) => product.id === idProduct
+      ({ product }) => product.id === idProduct,
     );
 
     if (index === -1) {
